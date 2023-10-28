@@ -1,13 +1,16 @@
----
 language: node_js
 node_js:
   - 14
+
 services:
   - docker
+
 install:
   - echo "nothing needs to be installed"
+
 before_script:
   - echo "no tests"
+
 script:
   - docker --version
   - docker build -t udagram-reverseproxy ./udagram-reverseproxy
@@ -18,6 +21,7 @@ script:
   - docker tag udagram-api-feed nguyenson99/udagram-api-feed:v1
   - docker tag udagram-api-user nguyenson99/udagram-api-user:v1
   - docker tag udagram-frontend nguyenson99/udagram-frontend:v1
+
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push nguyenson99/reverseproxy:v1
